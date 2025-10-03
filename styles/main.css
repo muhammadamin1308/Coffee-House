@@ -20,6 +20,77 @@
   box-sizing: border-box;
 }
 
+h1,
+.heading-1 {
+  font-family: "Inter", sans-serif;
+  font-size: 75px;
+  font-weight: 700;
+  line-height: 101%;
+  color: var(--text-light);
+  margin: 0;
+}
+
+h1.accent,
+.heading-1.accent {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+h2,
+.heading-2 {
+  font-family: "Inter", sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 125%;
+  letter-spacing: -0.02em;
+}
+
+h2.accent,
+.heading-2.accent {
+  font-style: italic;
+}
+
+h3,
+.heading-3 {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 125%;
+  letter-spacing: 0;
+}
+
+p,
+.body-medium {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.caption {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.text-action {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.burger-link{
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 125%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -30,7 +101,7 @@ body {
   background-color: var(--bg-body);
   color: var(--text-dark);
   margin: 0;
-  padding: 0 2rem;
+  padding: 0 40px;
 }
 
 /* Navbar */
@@ -38,7 +109,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .3rem ;
+  padding: .3rem 0;
   max-width: 100%;
   margin: 0 auto;
   z-index: 1000;
@@ -47,7 +118,6 @@ nav {
 .logo-img{
   width: 100px;
   height: 60px;
-  margin: 8px 10px;
 }
 
 .nav-menu {
@@ -71,7 +141,6 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 10px;
   text-decoration: none;
   color: var(--text-dark);
   background-color: transparent;
@@ -86,4 +155,48 @@ nav {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+}
+/* HERO */
+.hero{
+  border-radius: 2.5rem;
+  width: 100%;
+  height: 645px;
+  background-image: url(../assets/main/img-hero.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 60px 100px;
+}
+
+.hero-content {
+  max-width: 530px; 
+  z-index: 2;
+}
+
+
+.hero-desc {
+  margin: 40px 0;
+}
+
+.hero-menu-btn {
+  display: inline-block;
+  background-color: var(--text-light);
+  color: var(--text-dark);
+  padding: 20px 78px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-menu-btn:hover {
+  background-color: var(--text-accent);
+  color: white;
+  transform: translateY(-2px);
 }

@@ -26,8 +26,6 @@ h1,
   font-size: 72px;
   font-weight: 600;
   line-height: 105%;
-  letter-spacing: -0.02em;
-  margin: 0 0 1rem 0;
   color: var(--text-dark);
 }
 
