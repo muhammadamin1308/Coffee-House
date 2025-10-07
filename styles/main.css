@@ -14,23 +14,22 @@
   --border-dark: #665f55;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); 
 
 * {
   box-sizing: border-box;
 }
 
-h1,
 .heading-1 {
   font-family: "Inter", sans-serif;
-  font-size: 75px;
+  font-size: 72px;
   font-weight: 700;
-  line-height: 101%;
+  line-height: 105%;
+  letter-spacing: 0%;
   color: var(--text-light);
   margin: 0;
 }
 
-h1.accent,
 .heading-1.accent {
   font-style: italic;
   color: var(--text-accent);
@@ -97,7 +96,6 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 120%;
-  letter-spacing: 0;
   background-color: var(--bg-body);
   color: var(--text-dark);
   margin: 0;
@@ -199,4 +197,136 @@ nav {
   background-color: var(--text-accent);
   color: white;
   transform: translateY(-2px);
+}
+
+/* FAVORITE COFFEE SLIDER */
+.favorite-coffee {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.slider-container {
+  margin: 0 auto;
+}
+
+.favorite-coffee .heading-2 {
+  color: var(--text-dark);
+  margin-bottom: 80px;
+}
+
+.favorite-coffee .heading-2.accent {
+  color: var(--text-accent);
+}
+
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.slider {
+  width: 480px;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide.prev {
+  transform: translateX(-100%);
+}
+
+.coffee-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+
+.coffee-image {
+  width: 480px;
+  height: 480px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.coffee-name {
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.coffee-description {
+  color: var(--text-dark);
+  text-align: center;
+  max-width: 360px;
+  margin-bottom: 16px;
+  line-height: 150%;
+}
+
+.coffee-price {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.slider-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-dark);
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: var(--text-dark);
+}
+
+.slider-btn:hover {
+  background-color: var(--bg-container);
+  color: var(--text-light);
+}
+
+.slider-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 40px;
+  height: 4px;
+  background-color: var(--border-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.dot.active {
+  background-color: var(--border-dark);
 }
