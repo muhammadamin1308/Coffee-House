@@ -68,7 +68,7 @@ class CoffeeSlider {
   autoPlay() {
     setInterval(() => {
       this.nextSlide();
-    }, 50000); // Change slide every 5 seconds
+    }, 5000000); // Change slide every 5 seconds
   }
 }
 

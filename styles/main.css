@@ -14,7 +14,7 @@
   --border-dark: #665f55;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); 
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -38,10 +38,10 @@
 h2,
 .heading-2 {
   font-family: "Inter", sans-serif;
-  font-size: 60px;
+  font-size: 64px;
   font-weight: 600;
-  line-height: 125%;
-  letter-spacing: -0.02em;
+  line-height: 100%;
+  letter-spacing: -0.024em;
 }
 
 h2.accent,
@@ -80,7 +80,7 @@ p,
   line-height: 150%;
 }
 
-.burger-link{
+.burger-link {
   font-size: 32px;
   font-weight: 600;
   line-height: 125%;
@@ -107,13 +107,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .3rem 0;
+  padding: 0.3rem 0;
   max-width: 100%;
   margin: 0 auto;
   z-index: 1000;
 }
 
-.logo-img{
+.logo-img {
   width: 100px;
   height: 60px;
 }
@@ -155,7 +155,7 @@ nav {
   flex-shrink: 0;
 }
 /* HERO */
-.hero{
+.hero {
   border-radius: 2.5rem;
   width: 100%;
   height: 645px;
@@ -170,10 +170,9 @@ nav {
 }
 
 .hero-content {
-  max-width: 530px; 
+  max-width: 530px;
   z-index: 2;
 }
-
 
 .hero-desc {
   margin: 40px 0;
@@ -199,19 +198,20 @@ nav {
   transform: translateY(-2px);
 }
 
-/* FAVORITE COFFEE SLIDER */
+/* FAVORITE COFFEE */
 .favorite-coffee {
-  padding: 40px 0;
+  padding-top: 100px;
   text-align: center;
 }
 
 .slider-container {
+  height: 800px;
   margin: 0 auto;
 }
 
 .favorite-coffee .heading-2 {
   color: var(--text-dark);
-  margin-bottom: 80px;
+  margin: 10px 4px 20px;
 }
 
 .favorite-coffee .heading-2.accent {
@@ -223,21 +223,19 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
-  margin-bottom: 40px;
 }
 
 .slider {
   width: 480px;
-  height: 600px;
+  height: 690px;
   overflow: hidden;
   position: relative;
 }
 
 .slide {
   position: absolute;
-  width: 100%;
   height: 100%;
+  margin: 0 auto;
   opacity: 0;
   transform: translateX(100%);
   transition: all 0.5s ease-in-out;
@@ -264,7 +262,6 @@ nav {
   width: 480px;
   height: 480px;
   object-fit: cover;
-  margin-bottom: 20px;
 }
 
 .coffee-name {
@@ -274,11 +271,9 @@ nav {
 }
 
 .coffee-description {
-  color: var(--text-dark);
   text-align: center;
-  max-width: 360px;
+  max-width: 480px;
   margin-bottom: 16px;
-  line-height: 150%;
 }
 
 .coffee-price {
@@ -316,6 +311,7 @@ nav {
   display: flex;
   justify-content: center;
   gap: 12px;
+  padding-top: 11px;
 }
 
 .dot {
@@ -329,4 +325,11 @@ nav {
 
 .dot.active {
   background-color: var(--border-dark);
+}
+
+/* Examples section */
+
+.examples {
+  padding-top: 100px;
+  text-align: center;
 }
