@@ -1,11 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/coffee.css" />
+  </head>
+  <body>
+    <header>
+      <nav style="padding: 1.3rem">
+        <img class="logo-img" src="assets/logo.svg" alt="logo" />
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#favorite-coffee" class="nav-link text-action"
+              >Favorite coffee</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link text-action">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#mobile-app" class="nav-link text-action">Mobile app</a>
+          </li>
+          <li class="nav-item">
+            <a href="#conatct-us" class="nav-link text-action">Contact Us</a>
+          </li>
+        </ul>
+        <a href="coffee.html" class="menu-link">
+          <span class="text-action">Menu</span>
+          <img src="assets/main/coffee-cup.svg" alt="" />
+        </a>
+      </nav>
+    </header>
+
+    <main id="menu">
+      <div class="container menu-container">
+        <h1 class="menu-title">
+          Behind each of our cups hides an <em>amazing surprise</em>
+        </h1>
+        <div class="tabs">
+          <button class="tab-button active">
+            <span class="tab-icon">☕</span>
+            <span>Coffee</span>
+          </button>
+          <button class="tab-button">
+            <span class="tab-icon">🫖</span>
+            <span>Tea</span>
+          </button>
+          <button class="tab-button">
+            <span class="tab-icon">🍰</span>
+            <span>Dessert</span>
+          </button>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-1.jpg" alt="Irish coffee" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Irish coffee</h3>
+              <p>
+                Fragrant black coffee with Jameson Irish whiskey and whipped
+                milk
+              </p>
+              <p class="price">$7.00</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-8.jpg" alt="Kahlua coffee" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Kahlua coffee</h3>
+              <p>
+                Classic coffee with milk and Kahlua liqueur under a cap of
+                frothed milk
+              </p>
+              <p class="price">$7.00</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-2.jpg" alt="Honey raf" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Honey raf</h3>
+              <p>Espresso with frothed milk, cream and aromatic honey</p>
+              <p class="price">$5.50</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-3.jpg" alt="Ice cappuccino" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Ice cappuccino</h3>
+              <p>Cappuccino with soft thick foam in summer version with ice</p>
+              <p class="price">$5.00</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-4.jpg" alt="Espresso" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Espresso</h3>
+              <p>Classic black coffee</p>
+              <p class="price">$4.50</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-5.jpg" alt="Latte" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Latte</h3>
+              <p>
+                Espresso coffee with the addition of steamed milk and dense milk
+                foam
+              </p>
+              <p class="price">$5.50</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-6.jpg" alt="Latte macchiato" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Latte macchiato</h3>
+              <p>Espresso with frothed milk and chocolate</p>
+              <p class="price">$5.50</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/coffee/coffee-7.jpg" alt="Coffee with cognac" />
+            </div>
+            <div class="menu-card-content">
+              <h3>Coffee with cognac</h3>
+              <p>Fragrant black coffee with cognac and whipped cream</p>
+              <p class="price">$6.50</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact" style="margin-top: 100px;">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-text">
+            <h3 class="footer-title">
+              Sip, Savor, Smile.<br /><span class="accent-text"
+                >It's coffee time!</span
+              >
+            </h3>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="2"
+                    y="2"
+                    width="20"
+                    height="20"
+                    rx="5"
+                    ry="5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <line
+                    x1="17.5"
+                    y1="6.5"
+                    x2="17.51"
+                    y2="6.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-section">
+              <h3 class="heading-3">Contact us</h3>
+              <div class="contact-info">
+                <div class="contact-item">
+                  <img src="assets/main/pin-alt.png" alt="" />
+                  <span>8558 Green Rd., LA</span>
+                </div>
+                <div class="contact-item">
+                  <img src="assets/main/phone.png" alt="" />
+                  <a href="tel:+16035550123" class="contact-link"
+                    >+1 (603) 555-0123</a
+                  >
+                </div>
+                <div class="contact-item">
+                  <img src="assets/main/clock.png" alt="" />
+                  <span>Mon-Sat: 9:00 AM – 23:00 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
