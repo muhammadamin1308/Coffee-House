@@ -156,6 +156,7 @@ em {
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  border-radius: 40px;
 }
 .menu-card-image img {
   width: 100%;
@@ -204,6 +205,13 @@ em {
   .header-container {
     justify-content: space-between;
   }
+  .menu-card-content {
+    padding: 22px 19px;
+  }
+
+  .menu-card-content .price {
+    line-height: 0.95;
+  }
 }
 
 @media (max-width: 768px) {
@@ -230,6 +238,7 @@ em {
   }
   .menu-title {
     font-size: 32px;
+    padding: 0 10px;
   }
   .tabs {
     gap: 8px;
