@@ -77,8 +77,50 @@ document.addEventListener('DOMContentLoaded', () => {
   new CoffeeSlider();
 });
 
+// Mobile Menu Functionality
+class MobileMenu {
+  constructor() {
+    this.mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    this.navMenu = document.getElementById('navMenu');
+    this.navLinks = document.querySelectorAll('.nav-link');
+    
+    this.init();
+  }
+  
+  init() {
+    if (this.mobileMenuBtn && this.navMenu) {
+      this.mobileMenuBtn.addEventListener('click', () => this.toggleMenu());
+      
+      // Close menu when clicking on nav links
+      this.navLinks.forEach(link => {
+        link.addEventListener('click', () => this.closeMenu());
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!this.mobileMenuBtn.contains(e.target) && !this.navMenu.contains(e.target)) {
+          this.closeMenu();
+        }
+      });
+    }
+  }
+  
+  toggleMenu() {
+    this.mobileMenuBtn.classList.toggle('active');
+    this.navMenu.classList.toggle('active');
+  }
+  
+  closeMenu() {
+    this.mobileMenuBtn.classList.remove('active');
+    this.navMenu.classList.remove('active');
+  }
+}
+
 // Smooth scroll for navigation links
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize mobile menu
+  new MobileMenu();
+  
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   
   navLinks.forEach(link => {

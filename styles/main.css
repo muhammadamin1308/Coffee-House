@@ -14,18 +14,23 @@
   --border-dark: #665f55;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-
 * {
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", serif;
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0 40px;
 }
 
 .heading-1 {
   font-family: "Inter", sans-serif;
   font-size: 72px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 105%;
-  letter-spacing: 0%;
   color: var(--text-light);
   margin: 0;
 }
@@ -37,7 +42,6 @@
 
 h2,
 .heading-2 {
-  font-family: "Inter", sans-serif;
   font-size: 63px;
   font-weight: 600;
   line-height: 113%;
@@ -86,22 +90,6 @@ p,
   font-size: 32px;
   font-weight: 600;
   line-height: 125%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 120%;
-  background-color: var(--bg-body);
-  color: var(--text-dark);
-  margin: 0;
-  padding: 0 40px;
 }
 
 /* Navbar */
@@ -160,7 +148,6 @@ nav {
 .hero {
   border-radius: 2.5rem;
   width: 100%;
-  height: 645px;
   background-image: url(../assets/main/img-hero.png);
   background-size: cover;
   background-position: center;
@@ -168,7 +155,8 @@ nav {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 60px 100px;
+  padding: 100px 100px;
+  margin: auto;
 }
 
 .hero-content {
@@ -178,13 +166,14 @@ nav {
 
 .hero-desc {
   margin: 40px 0;
+  color: var(--text-light);
 }
 
 .hero-menu-btn {
   display: inline-block;
   background-color: var(--text-light);
   color: var(--text-dark);
-  padding: 20px 78px;
+  padding: 19px 67px;
   border-radius: 100px;
   text-decoration: none;
   font-size: 16px;
@@ -313,7 +302,7 @@ nav {
   display: flex;
   justify-content: center;
   gap: 12px;
-  padding-top: 11px;
+  padding-top: 13px;
 }
 
 .dot {
@@ -332,7 +321,7 @@ nav {
 /* Examples section */
 
 .about {
-  padding-top: 100px;
+  margin-top: 100px;
   text-align: center;
 }
 
@@ -401,11 +390,12 @@ nav {
   gap: 100px;
   align-items: center;
 }
-.mobile-app-text{
+.mobile-app-text {
   height: 342px;
 }
 
 .mobile-app-title {
+  font-family: Inter, sans-serif;
   font-size: 60px;
   font-weight: 600;
   line-height: 1.25;
@@ -543,7 +533,7 @@ nav {
   background-color: var(--text-light);
   color: var(--text-dark);
 }
-.footer-contact{
+.footer-contact {
   margin-top: 10px;
 }
 .contact-info {
@@ -569,4 +559,403 @@ nav {
 
 .contact-link:hover {
   color: var(--text-accent);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-dark);
+  margin: 3px 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Tablet Portrait: 768px and down */
+@media (max-width: 768px) {
+  .heading-2 {
+    line-height: 116%;
+    letter-spacing: -0.023em;
+  }
+  /* Navigation */
+  nav {
+    margin: 15px auto;
+  }
+
+  .nav {
+    padding: 15px 0;
+    position: relative;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .menu-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  .menu-link {
+    display: none;
+  }
+  .menu-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Hero Section */
+  .hero {
+    margin-top: 15px;
+    padding: 100px 60px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding-left: 0px;
+    padding-right: 40px;
+  }
+  .hero-menu-btn {
+    width: 200px;
+    height: 63px;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-primary {
+    padding: 16px 60px;
+    font-size: 14px;
+  }
+
+  /* Coffee Slider */
+  .coffee-slider {
+    padding: 80px 0;
+  }
+
+  .favorite-coffee .heading-2 {
+    margin: 2px -3px 22px;
+  }
+
+  .section-title {
+    font-size: 42px;
+    margin-bottom: 60px;
+  }
+
+  .slider-container {
+    width: 100%;
+  }
+
+  .coffee-img {
+    width: 220px;
+    height: 220px;
+  }
+
+  /* About Section */
+  .about {
+    padding: 80px 0;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 120px;
+  }
+
+  .about-gallery {
+    margin-top: 4px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .gallery-item {
+    height: 590px;
+  }
+
+  .gallery-item.three {
+    display: none;
+  }
+
+  .gallery-item.four {
+    display: none;
+  }
+
+  /* Mobile App Section */
+  .mobile-app {
+    margin: 80px 0 0;
+  }
+
+  .mobile-app-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .app-links {
+    flex-wrap: wrap;
+  }
+
+  .mobile-app-images {
+    margin-top: 60px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 80px 60px 70px;
+    margin-bottom: 0;
+  }
+
+  .footer-content {
+    padding: 20px 0;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .footer-contact {
+    margin-top: 35px;
+  }
+  .contact-info {
+    gap: 25px;
+  }
+  .contact-item {
+    gap: 8px;
+  }
+}
+
+/* Mobile: 480px and down */
+@media (max-width: 480px) {
+  body {
+    padding: 0 16px;
+  }
+  .heading-1 {
+    font-size: 42px;
+    line-height: 116%;
+  }
+
+  .heading-2 {
+    font-size: 32px;
+    line-height: 126%;
+  }
+
+  /* Navigation */
+  .logo-img {
+    width: 100px;
+    height: 60px;
+  }
+
+  .menu-btn span {
+    display: none;
+  }
+
+  .menu-btn {
+    padding: 8px;
+    min-width: 44px;
+  }
+
+  /* Hero Section */
+  .hero {
+    height: 550px;
+    max-width: 348px;
+    padding: 0;
+  }
+
+  .hero-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .btn-primary {
+    padding: 14px 48px;
+    font-size: 13px;
+  }
+
+  /* Coffee Slider */
+  .coffee-slider {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .slider-container {
+  }
+
+  .prev-btn {
+    display: none;
+  }
+
+  .next-btn {
+    display: none;
+  }
+
+  .slider {
+    max-height: 576px;
+    padding-top: 10px;
+  }
+
+  .favorite-coffee .heading-2 {
+    margin: 3px 9px 7px;
+  }
+
+  .coffee-image {
+    width: 348px;
+    height: 348px;
+  }
+
+  .slider-dots {
+    padding-top: 28px;
+  }
+
+  /* About Section */
+  .about {
+    padding: 0;
+    margin-top: 0;
+  }
+  .about-h2 {
+    padding-right: 30px;
+    line-height: 120%;
+  }
+  .about-gallery {
+    max-height: 10000px;
+  }
+
+  .about-content {
+    gap: 40px;
+  }
+  /* Mobile App Section */
+  .mobile-app {
+    padding: 20px 0;
+  }
+
+  .mobile-app-title {
+    font-size: 28px;
+  }
+
+  .mobile-app-images {
+    margin-top: 35px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 62px 16px;
+    margin-top: 72px;
+    padding-right: 0px;
+  }
+
+  .footer-content {
+    padding: 0;
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+
+  .footer-title {
+    font-size: 32px;
+  }
+  .contact-item {
+    font-size: 14px;
+  }
+  .social-links {
+    gap: 12px;
+  }
+  .footer-contact {
+    margin-top: 18px;
+  }
+}
+
+/* Extra Small Mobile: 360px and down */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .section-title,
+  .about-h2,
+  .mobile-app-title,
+  .footer-title {
+    font-size: 24px;
+  }
+
+  .slider-container {
+    max-width: 280px;
+  }
+
+  .coffee-img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .app-btn {
+    max-width: 240px;
+    padding: 10px 16px;
+  }
+
+  .app-btn-text {
+    font-size: 14px;
+  }
+
+  .app-btn svg {
+    width: 28px;
+    height: 28px;
+  }
 }
