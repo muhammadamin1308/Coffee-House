@@ -1,11 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/coffee.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">
+          <img class="logo-img" src="assets/logo.svg" alt="logo" />
+        </a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="index.html#favorite-coffee" class="nav-link text-action"
+            >Favorite coffee</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="index.html#about" class="nav-link text-action">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#mobile-app" class="nav-link text-action"
+            >Mobile app</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="index.html#conatct-us" class="nav-link text-action"
+            >Contact us</a
+            >
+          </li>
+        </ul>
+        <a href="coffee.html" class="menu-link">
+          <span class="text-action">Menu</span>
+          <img src="assets/main/coffee-cup.svg" alt="" />
+        </a>
+        <div class="burger" id="burger">
+          <img class="burger-default" src="assets/burger-default.svg" alt="" style="display: block;" />
+          <img class="burger-active close-burger" src="assets/burger-active.svg" alt="" style="display: none;"/>
+        </div>
+      </nav>
+      <div class="menu" id="menu">
+        <a class="burger-link" href="coffee.html">Favorite coffee</a>
+        <a class="burger-link" href="index.html#about">About</a>
+        <a class="burger-link" href="index.html#mobile-app">Mobile app</a>
+        <a class="burger-link" href="index.html#contact-us  ">Contact us</a>
+        <a href="coffee.html" class= " burger-link">
+          <span class="">Menu</span>
+          <img class="burger-coffee" src="assets/main/coffee-cup.svg" alt="" />
+        </a>
+      </div>
+    </header>
+
+    <main id="menu">
+      <div class="container menu-container">
+        <h2 class="menu-title heading-2">
+          Behind each of our cups hides an <em>amazing surprise</em>
+        </h2>
+        <div class="tabs">
+          <button class="tab-button active" data-category="coffee">☕ Coffee</button>
+          <button class="tab-button" data-category="tea">🍃 Tea</button>
+          <button class="tab-button" data-category="dessert">🧁 Dessert</button>
+        </div>
+                <div class="menu-grid">
+
+        </div>
+        <div class="load-more-container">
+          <!-- Load more button will be added here -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact" style="margin-top: 100px;">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-text">
+            <h3 class="footer-title">
+              Sip, Savor, Smile.<br /><span class="accent-text"
+                >It's coffee time!</span
+              >
+            </h3>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="2"
+                    y="2"
+                    width="20"
+                    height="20"
+                    rx="5"
+                    ry="5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <line
+                    x1="17.5"
+                    y1="6.5"
+                    x2="17.51"
+                    y2="6.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-section">
+              <h3 class="heading-3">Contact us</h3>
+              <div class="contact-info">
+                <div class="contact-item">
+                  <img src="assets/main/pin-alt.png" alt="" />
+                  <span>8558 Green Rd., LA</span>
+                </div>
+                <div class="contact-item">
+                  <img src="assets/main/phone.png" alt="" />
+                  <a href="tel:+16035550123" class="contact-link"
+                    >+1 (603) 555-0123</a
+                  >
+                </div>
+                <div class="contact-item">
+                  <img src="assets/main/clock.png" alt="" />
+                  <span>Mon-Sat: 9:00 AM – 23:00 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal" id="modal">
+        <button class="modal-close" id="modal-close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="modal-content">
+          <div class="modal-image">
+            <img id="modal-product-image" src="" alt="" />
+          </div>
+          <div class="modal-details">
+            <h3 id="modal-product-name" class="modal-title"></h3>
+            <p id="modal-product-description" class="modal-description"></p>
+            
+            <div class="modal-section">
+              <h4 class="modal-section-title">Size</h4>
+              <div class="modal-options size-options" id="size-options">
+                <label class="modal-option">
+                  <input type="radio" name="size" value="s" data-price="0.00" checked>
+                  <span class="option-button">
+                    <span class="option-icon">S</span>
+                    <span class="option-text" id="size-s-text">200 ml</span>
+                  </span>
+                </label>
+                <label class="modal-option">
+                  <input type="radio" name="size" value="m" data-price="0.50">
+                  <span class="option-button">
+                    <span class="option-icon">M</span>
+                    <span class="option-text" id="size-m-text">300 ml</span>
+                  </span>
+                </label>
+                <label class="modal-option">
+                  <input type="radio" name="size" value="l" data-price="1.00">
+                  <span class="option-button">
+                    <span class="option-icon">L</span>
+                    <span class="option-text" id="size-l-text">400 ml</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="modal-section">
+              <h4 class="modal-section-title">Additives</h4>
+              <div class="modal-options additive-options" id="additive-options">
+                <label class="modal-option">
+                  <input type="checkbox" name="additive" value="additive-1" data-price="0.50">
+                  <span class="option-button">
+                    <span class="option-icon">1</span>
+                    <span class="option-text" id="additive-1-text">Sugar</span>
+                  </span>
+                </label>
+                <label class="modal-option">
+                  <input type="checkbox" name="additive" value="additive-2" data-price="0.50">
+                  <span class="option-button">
+                    <span class="option-icon">2</span>
+                    <span class="option-text" id="additive-2-text">Cinnamon</span>
+                  </span>
+                </label>
+                <label class="modal-option">
+                  <input type="checkbox" name="additive" value="additive-3" data-price="0.50">
+                  <span class="option-button">
+                    <span class="option-icon">3</span>
+                    <span class="option-text" id="additive-3-text">Syrup</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <div class="modal-total">
+                <span class="total-label">Total:</span>
+                <span class="total-price" id="modal-total-price">$4.20</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script/coffee.js"></script>
+  </body>
 </html>
