@@ -1,7 +1,12 @@
-import { productService } from '../services/productService';
-import type { FavCoffee } from '../types';
+import { productService } from "../services/productService";
+import type { FavCoffee } from "../types";
 
 export function renderHome(): string {
+    const dots = Array.from(
+    { length: 3},
+    (_, i) =>
+      `<span class="dot ${i === 0 ? "active" : ""}" data-slide="${i}"></span>`
+  ).join("");
   return `
     <div id="home">
       <section class="hero">
@@ -29,6 +34,9 @@ export function renderHome(): string {
           <div class="slider-wrapper" id="slider-wrapper">
             <div class="loader"></div>
           </div>
+              <div class="slider-dots">
+                ${dots}
+              </div>
         </div>
       </section>
       <section class="about" id="about">
@@ -125,27 +133,23 @@ export function renderHome(): string {
 function renderSliderControls() {
   return `
     <button class="slider-btn prev-btn" id="prevBtn">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img src="assets/prev-btn.svg" alt="Previous" />
     </button>
     <div class="slider" id="slider"></div>
     <button class="slider-btn next-btn" id="nextBtn">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg> 
+      <img src="assets/next-btn.svg" alt="Next" />
     </button>
   `;
 }
 
 function renderSlides(products: FavCoffee[]) {
-  const slider = document.getElementById('slider');
+  const slider = document.getElementById("slider");
   if (!slider) return;
 
-  slider.innerHTML = products.map((p, index) => `
-    <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+  slider.innerHTML = products
+    .map(
+      (p, index) => `
+    <div class="slide ${index === 0 ? "active" : ""}" data-index="${index}">
       <div class="coffee-card">
         <img
           src="assets/coffee/coffee-${p.id}.jpg"
@@ -157,50 +161,105 @@ function renderSlides(products: FavCoffee[]) {
         <p class="coffee-price">$${p.price}</p>
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join("");
 }
 
-function setupSlider(products: FavCoffee[]) {
-  let currentIndex = 0;
-  const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
-  const totalSlides = slides.length;
+class CoffeeSlider {
+  private currentSlide: number = 0;
+  private slides: NodeListOf<HTMLElement>;
+  private dots: NodeListOf<HTMLElement>;
+  private prevBtn: HTMLElement | null;
+  private nextBtn: HTMLElement | null;
+  private totalSlides: number;
+  private autoPlayInterval: number | null = null;
 
-  const showSlide = (index: number) => {
-    slides.forEach((slide, i) => {
-      slide.classList.remove('active');
-      if (i === index) {
-        slide.classList.add('active');
+  constructor() {
+    this.slides = document.querySelectorAll(
+      ".slide"
+    ) as NodeListOf<HTMLElement>;
+    this.dots = document.querySelectorAll(".dot") as NodeListOf<HTMLElement>;
+    this.prevBtn = document.getElementById("prevBtn");
+    this.nextBtn = document.getElementById("nextBtn");
+    this.totalSlides = this.slides.length;
+
+    this.init();
+  }
+
+  private init(): void {
+    // Add event listeners for navigation buttons
+    this.prevBtn?.addEventListener("click", () => this.prevSlide());
+    this.nextBtn?.addEventListener("click", () => this.nextSlide());
+
+    // Add dot click listeners
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => this.goToSlide(index));
+    });
+
+    // Start auto-play
+    this.autoPlay();
+
+    // Update initial state
+    this.updateSlider();
+  }
+
+  private nextSlide(): void {
+    this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+    this.updateSlider();
+  }
+
+  private prevSlide(): void {
+    this.currentSlide =
+      this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+    this.updateSlider();
+  }
+
+  private goToSlide(slideIndex: number): void {
+    this.currentSlide = slideIndex;
+    this.updateSlider();
+  }
+
+  private updateSlider(): void {
+    this.slides.forEach((slide, index) => {
+      slide.classList.remove("active", "prev");
+
+      if (index === this.currentSlide) {
+        slide.classList.add("active");
+      } else if (index < this.currentSlide) {
+        slide.classList.add("prev");
       }
     });
-  };
 
-  const nextSlide = () => {
-    currentIndex = (currentIndex + 1) % totalSlides;
-    showSlide(currentIndex);
-  };
+    this.dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === this.currentSlide);
+    });
+  }
 
-  const prevSlide = () => {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-    showSlide(currentIndex);
-  };
+  private autoPlay(): void {
+    this.autoPlayInterval = window.setInterval(() => {
+      this.nextSlide();
+    }, 5000);
+  }
 
-  document.getElementById('nextBtn')?.addEventListener('click', nextSlide);
-  document.getElementById('prevBtn')?.addEventListener('click', prevSlide);
-
-  renderSlides(products);
-  showSlide(currentIndex);
+  public destroy(): void {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+    }
+  }
 }
 
 export async function initializeSlider() {
-  const sliderWrapper = document.getElementById('slider-wrapper');
+  const sliderWrapper = document.getElementById("slider-wrapper");
   if (!sliderWrapper) return;
 
   try {
     const favoriteProducts = await productService.loadFavoriteProducts();
     sliderWrapper.innerHTML = renderSliderControls();
     renderSlides(favoriteProducts);
-    setupSlider(favoriteProducts);
+
+    new CoffeeSlider();
   } catch (error) {
-    sliderWrapper.innerHTML = `<p class="error-message">Something went wrong. Please, refresh the page. ${error}</p>`;
+    sliderWrapper.innerHTML = `<p class="error-message">Something went wrong. Please, refresh the page</p>`;
   }
 }
