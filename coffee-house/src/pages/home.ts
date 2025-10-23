@@ -1,3 +1,6 @@
+import { productService } from '../services/productService';
+import type { FavCoffee } from '../types';
+
 export function renderHome(): string {
   return `
     <div id="home">
@@ -13,9 +16,8 @@ export function renderHome(): string {
             those seeking a warm and inviting space to enjoy their favorite
             beverage.
           </p>
-          <a href="coffee.html" class="hero-menu-btn">
+          <a href="#menu" class="hero-menu-btn">
             <span class="text-action">Menu</span>
-            <img src="assets/main/coffee-cup.svg" alt="" />
           </a>
         </div>
       </section>
@@ -24,70 +26,8 @@ export function renderHome(): string {
           <h2 class="heading-2 favorite-h2">
             Choose your <span class="heading-2 accent">favorite</span> coffee
           </h2>
-          <div class="slider-wrapper">
-            <button class="slider-btn prev-btn" id="prevBtn">
-              <img src="assets/prev-btn.svg" alt="" />
-            </button>
-
-            <div class="slider">
-              <div class="slide active">
-                <div class="coffee-card">
-                  <img
-                    src="assets/main/coffee-slider-1.png"
-                    alt="S'mores Frappuccino"
-                    class="coffee-image"
-                  />
-                  <h3 class="heading-3 coffee-name">S'mores Frappuccino</h3>
-                  <p class="body-medium coffee-description">
-                    This new drink takes an espresso and mixes it with brown
-                    sugar and cinnamon before being topped with oat milk.
-                  </p>
-                  <p class="coffee-price">$5.50</p>
-                </div>
-              </div>
-
-              <div class="slide">
-                <div class="coffee-card">
-                  <img
-                    src="assets/main/coffee-slider-2.png"
-                    alt="Caramel Macchiato"
-                    class="coffee-image"
-                  />
-                  <h3 class="heading-3 coffee-name">Caramel Macchiato</h3>
-                  <p class="body-medium coffee-description">
-                    Espresso shots are combined with vanilla syrup, steamed milk
-                    and caramel drizzle.
-                  </p>
-                  <span class="coffee-price">$5.00</span>
-                </div>
-              </div>
-
-              <div class="slide">
-                <div class="coffee-card">
-                  <img
-                    src="assets/main/coffee-slider-3.png"
-                    alt="Ice Coffee"
-                    class="coffee-image"
-                  />
-                  <h3 class="heading-3 coffee-name">Ice Coffee</h3>
-                  <p class="body-medium coffee-description">
-                    A refreshing blend of our signature espresso roast served
-                    over ice.
-                  </p>
-                  <span class="coffee-price">$4.50</span>
-                </div>
-              </div>
-            </div>
-
-            <button class="slider-btn next-btn" id="nextBtn">
-              <img src="assets/next-btn.svg" alt="" />
-            </button>
-          </div>
-
-          <div class="slider-dots">
-            <span class="dot active" data-slide="0"></span>
-            <span class="dot" data-slide="1"></span>
-            <span class="dot" data-slide="2"></span>
+          <div class="slider-wrapper" id="slider-wrapper">
+            <div class="loader"></div>
           </div>
         </div>
       </section>
@@ -180,4 +120,87 @@ export function renderHome(): string {
       </section>
     </div>
   `;
+}
+
+function renderSliderControls() {
+  return `
+    <button class="slider-btn prev-btn" id="prevBtn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="slider" id="slider"></div>
+    <button class="slider-btn next-btn" id="nextBtn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg> 
+    </button>
+  `;
+}
+
+function renderSlides(products: FavCoffee[]) {
+  const slider = document.getElementById('slider');
+  if (!slider) return;
+
+  slider.innerHTML = products.map((p, index) => `
+    <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+      <div class="coffee-card">
+        <img
+          src="assets/coffee/coffee-${p.id}.jpg"
+          alt="${p.name}"
+          class="coffee-image"
+        />
+        <h3 class="heading-3 coffee-name">${p.name}</h3>
+        <p class="body-medium coffee-description">${p.description}</p>
+        <p class="coffee-price">$${p.price}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setupSlider(products: FavCoffee[]) {
+  let currentIndex = 0;
+  const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
+  const totalSlides = slides.length;
+
+  const showSlide = (index: number) => {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) {
+        slide.classList.add('active');
+      }
+    });
+  };
+
+  const nextSlide = () => {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    showSlide(currentIndex);
+  };
+
+  const prevSlide = () => {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    showSlide(currentIndex);
+  };
+
+  document.getElementById('nextBtn')?.addEventListener('click', nextSlide);
+  document.getElementById('prevBtn')?.addEventListener('click', prevSlide);
+
+  renderSlides(products);
+  showSlide(currentIndex);
+}
+
+export async function initializeSlider() {
+  const sliderWrapper = document.getElementById('slider-wrapper');
+  if (!sliderWrapper) return;
+
+  try {
+    const favoriteProducts = await productService.loadFavoriteProducts();
+    sliderWrapper.innerHTML = renderSliderControls();
+    renderSlides(favoriteProducts);
+    setupSlider(favoriteProducts);
+  } catch (error) {
+    sliderWrapper.innerHTML = `<p class="error-message">Something went wrong. Please, refresh the page. ${error}</p>`;
+  }
 }

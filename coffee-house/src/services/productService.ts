@@ -19,6 +19,20 @@ export class ProductService {
     }
   }
 
+  async loadFavoriteProducts(): Promise<FavCoffee[]> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/favorites`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch favorite products');
+      }
+      const data = await response.json();
+      return data.data || data;
+    } catch (error) {
+      console.error('Failed to load favorite products:', error);
+      throw error; // Re-throw to be caught by the caller
+    }
+  }
+
   async getProductById(id: number): Promise<Coffee | null> {
     try {
       const response = await fetch(`${API_BASE_URL}/api/products/${id}`)
@@ -40,5 +54,6 @@ export class ProductService {
     return this.products.filter(p => p.category === category)
   }
 }
+
 
 export const productService = new ProductService()

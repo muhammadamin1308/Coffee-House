@@ -1,4 +1,4 @@
-import { renderHome } from "../pages/home";
+import { renderHome, initializeSlider } from "../pages/home";
 import { renderMenu, loadMenuData } from "../pages/menu";
 import { renderCart } from "../pages/cart";
 import { renderLogin } from "../pages/auth/login";
@@ -48,6 +48,7 @@ export async function renderRoute(route: string): Promise<void> {
     default:
       await loadCSS("home.css");
       content.innerHTML = renderHome();
+      await initializeSlider();
       break;
   }
 }
