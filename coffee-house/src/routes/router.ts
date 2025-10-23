@@ -19,7 +19,6 @@ export async function renderRoute(route: string): Promise<void> {
   const content = document.getElementById("content");
   if (!content) return;
 
-  // Normalize route: remove # prefix and handle empty string
   const normalizedRoute = route.startsWith("#") ? route.slice(1) : route;
   const page = normalizedRoute || "home";
 
