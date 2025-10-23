@@ -7,7 +7,7 @@ export class ProductService {
 
   async loadProducts(): Promise<FavCoffee[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/products`)
+      const response = await fetch(`${API_BASE_URL}/products`)
       if (!response.ok) throw new Error('Failed to fetch')
 
       const data = await response.json()
