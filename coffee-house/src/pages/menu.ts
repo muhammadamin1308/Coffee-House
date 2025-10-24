@@ -25,7 +25,6 @@ export function renderMenu(): string {
 }
 
 let allProducts: FavCoffee[] = [];
-let currentCategory: Category = "coffee";
 
 function renderProductCard(p: FavCoffee): string {
   return `
@@ -50,7 +49,6 @@ function displayProducts(products: FavCoffee[]): void {
 }
 
 function filterByCategory(category: Category): void {
-  currentCategory = category;
   const filtered = productService.getProductsByCategory(category);
   displayProducts(filtered);
 }
@@ -82,7 +80,7 @@ export async function loadMenuData(): Promise<void> {
 
     if (allProducts.length === 0) {
       container.innerHTML =
-        '<p class="error-message">No products available at the moment.</p>';
+        '<p class="error-message">Something went wrong. Please, refresh the page</p>';
       return;
     }
 
