@@ -35,13 +35,13 @@ export class ProductService {
 
   async getProductById(id: number): Promise<Coffee | null> {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/products/${id}`)
+      const response = await fetch(`${API_BASE_URL}/products/${id}`)
       if (!response.ok) throw new Error('Failed to fetch')
 
       const data = await response.json()
       return data.data || data;
     } catch (error) {
-      console.error('Failed to load product by ID:', error);
+      console.error('Failed to load product by ID: ', error);
       return null;
     }
   }
