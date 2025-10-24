@@ -1,18 +1,18 @@
 export type Size = "s" | "m" | "l" | "xl" | "xxl";
 export type Category = "coffee" | "tea" | "dessert";
-export type discountPrice = string | null;
+export type discountPrice = string | null | undefined;
 
 
 export interface SizeOption{
   size: string;
   price: string;
-  discountPrice: discountPrice;
+  discountPrice?: discountPrice;
 }
 
 export interface Additive{
   size: string;
   price: string;
-  discountPrice: discountPrice;
+  discountPrice?: discountPrice;
 }
 
 export interface FavCoffee {
@@ -26,7 +26,7 @@ export interface FavCoffee {
 
 export interface Coffee extends FavCoffee {
  sizes?: Record<Size, SizeOption>;
- additives?: Additive[]
+ additives: Additive[]
 }
 
 export interface CartItem {
