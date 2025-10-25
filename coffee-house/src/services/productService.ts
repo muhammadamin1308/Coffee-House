@@ -34,16 +34,77 @@ export class ProductService {
   }
 
   async getProductById(id: number): Promise<Coffee | null> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/products/${id}`)
-      if (!response.ok) throw new Error('Failed to fetch')
+    // First, ensure products are loaded
+    if (this.products.length === 0) {
+      await this.loadProducts();
+    }
 
-      const data = await response.json()
-      return data.data || data;
-    } catch (error) {
-      console.error('Failed to load product by ID: ', error);
+    // Find the product in cached data
+    const product = this.products.find(p => p.id === id);
+    
+    if (!product) {
+      console.error('Product not found in cache:', id);
       return null;
     }
+
+    // Convert FavCoffee to Coffee by adding sizes and additives
+    const coffeeProduct: Coffee = {
+      ...product,
+      sizes: {
+        s: {
+          size: '200 ml',
+          price: product.price,
+          discountPrice: product.discountPrice,
+        },
+        m: {
+          size: '300 ml',
+          price: (parseFloat(product.price) + 0.50).toFixed(2),
+          discountPrice: product.discountPrice 
+            ? (parseFloat(product.discountPrice) + 0.50).toFixed(2) 
+            : null,
+        },
+        l: {
+          size: '400 ml',
+          price: (parseFloat(product.price) + 1.00).toFixed(2),
+          discountPrice: product.discountPrice 
+            ? (parseFloat(product.discountPrice) + 1.00).toFixed(2) 
+            : null,
+        },
+        xl: {
+          size: '500 ml',
+          price: (parseFloat(product.price) + 1.50).toFixed(2),
+          discountPrice: product.discountPrice 
+            ? (parseFloat(product.discountPrice) + 1.50).toFixed(2) 
+            : null,
+        },
+        xxl: {
+          size: '600 ml',
+          price: (parseFloat(product.price) + 2.00).toFixed(2),
+          discountPrice: product.discountPrice 
+            ? (parseFloat(product.discountPrice) + 2.00).toFixed(2) 
+            : null,
+        },
+      },
+      additives: [
+        {
+          name: 'Sugar',
+          price: '0.50',
+          discountPrice: null,
+        },
+        {
+          name: 'Cinnamon',
+          price: '0.50',
+          discountPrice: null,
+        },
+        {
+          name: 'Syrup',
+          price: '0.50',
+          discountPrice: null,
+        },
+      ],
+    };
+
+    return coffeeProduct;
   }
 
   getProducts(): FavCoffee[]{

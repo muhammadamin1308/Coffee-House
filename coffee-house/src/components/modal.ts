@@ -1,5 +1,10 @@
 export function loadModal(): string {
   return `    <div class="modal-overlay" id="modal-overlay">
+      <!-- Modal Loader -->
+      <div class="modal-loader" id="modal-loader" style="display: none;">
+        <div class="spinner"></div>
+      </div>
+      
       <div class="modal" id="modal">
         <button class="modal-close" id="modal-close">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -101,6 +106,7 @@ export function loadModal(): string {
                 <span class="total-label">Total:</span>
                 <span class="total-price" id="modal-total-price">$4.20</span>
               </div>
+              <button class="btn-primary" id="add-to-cart-btn">Add to Cart</button>
             </div>
           </div>
         </div>

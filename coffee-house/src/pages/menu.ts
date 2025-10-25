@@ -1,5 +1,7 @@
 import { productService } from "../services/productService";
 import type { Category, FavCoffee } from "../types";
+import { loadModal } from "../components/modal";
+import { modalManager } from "../utils/modal/modalManager";
 
 export function renderMenu(): string {
   return `
@@ -21,6 +23,7 @@ export function renderMenu(): string {
         </div>
       </div>
     </div>
+    ${loadModal()}
   `;
 }
 
@@ -46,6 +49,22 @@ function displayProducts(products: FavCoffee[]): void {
 
   if (!container) return;
   container.innerHTML = products.map(renderProductCard).join("");
+
+  // Setup click handlers for product cards
+  setupProductCardListeners();
+}
+
+function setupProductCardListeners(): void {
+  const productCards = document.querySelectorAll(".menu-card");
+
+  productCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const productId = card.getAttribute("data-product-id");
+      if (productId) {
+        modalManager.openModal(parseInt(productId));
+      }
+    });
+  });
 }
 
 function filterByCategory(category: Category): void {
