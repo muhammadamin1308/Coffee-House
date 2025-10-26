@@ -10,7 +10,7 @@ async function loadCSS(fileName: string): Promise<void> {
 
   const link = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = `./src/style/${fileName}`;
+  link.href = `/src/style/${fileName}`;
   link.setAttribute("data-page-style", "true");
   document.head.appendChild(link);
 }
