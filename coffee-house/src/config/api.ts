@@ -1,6 +1,10 @@
 const BACKEND_URL = 'http://coffee-shop-be.eu-central-1.elasticbeanstalk.com';
 
-export const API_BASE_URL = BACKEND_URL;
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+
+export const API_BASE_URL = import.meta.env.PROD 
+  ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL)}`
+  : BACKEND_URL;
 
 export const API_ENDPOINTS = {
   PRODUCTS: `${API_BASE_URL}/products`,
