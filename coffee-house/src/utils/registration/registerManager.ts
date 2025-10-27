@@ -1,75 +1,7 @@
 import type { FormData, ValidationResult } from "../../types/index";
-import { CITIES_STREETS } from "../../types";
-import { API_ENDPOINTS } from "../../config/api";
-
-class RegistrationValidator {
-  validateLogin(login: string): ValidationResult {
-    if (!login || login.trim().length < 3) {
-      return { isValid: false, message: "Login must be at least 3 characters long" };
-    }
-    
-    if (!/^[a-zA-Z]/.test(login)) {
-      return { isValid: false, message: "Login must start with a letter" };
-    }
-    
-    if (!/^[a-zA-Z]+$/.test(login)) {
-      return { isValid: false, message: "Login must contain only English letters" };
-    }
-    
-    return { isValid: true, message: "" };
-  }
-
-  validatePassword(password: string): ValidationResult {
-    if (!password || password.length < 6) {
-      return { isValid: false, message: "Password must be at least 6 characters long" };
-    }
-    
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      return { isValid: false, message: "Password must contain at least 1 special character" };
-    }
-    
-    return { isValid: true, message: "" };
-  }
-
-  validateConfirmPassword(password: string, confirmPassword: string): ValidationResult {
-    if (!confirmPassword) {
-      return { isValid: false, message: "Please confirm your password" };
-    }
-    
-    if (password !== confirmPassword) {
-      return { isValid: false, message: "Passwords do not match" };
-    }
-    
-    return { isValid: true, message: "" };
-  }
-
-  validateCity(city: string): ValidationResult {
-    if (!city) {
-      return { isValid: false, message: "Please select a city" };
-    }
-    return { isValid: true, message: "" };
-  }
-
-  validateStreet(street: string): ValidationResult {
-    if (!street) {
-      return { isValid: false, message: "Please select a street" };
-    }
-    return { isValid: true, message: "" };
-  }
-
-  validateHouseNumber(houseNumber: string): ValidationResult {
-    const num = parseInt(houseNumber);
-    if (!houseNumber || isNaN(num)) {
-      return { isValid: false, message: "Please enter a house number" };
-    }
-    
-    if (num < 2) {
-      return { isValid: false, message: "House number must be greater than 1" };
-    }
-    
-    return { isValid: true, message: "" };
-  }
-}
+import { RegistrationValidator } from "./regitrationValidation";
+import { FormHelpers } from "./formHelpers";
+import { RegistrationService } from "./registrationService";
 
 export class RegistrationManager {
   private validator: RegistrationValidator;
@@ -95,12 +27,7 @@ export class RegistrationManager {
     const citySelect = document.getElementById("city") as HTMLSelectElement;
     if (!citySelect) return;
 
-    Object.keys(CITIES_STREETS).forEach(city => {
-      const option = document.createElement("option");
-      option.value = city;
-      option.textContent = city;
-      citySelect.appendChild(option);
-    });
+    FormHelpers.setupCities(citySelect);
   }
 
   private setupEventListeners(): void {
@@ -150,22 +77,7 @@ export class RegistrationManager {
 
     if (!citySelect || !streetSelect) return;
 
-    const selectedCity = citySelect.value;
-    streetSelect.innerHTML = '<option value="">Select street</option>';
-
-    if (selectedCity && CITIES_STREETS[selectedCity]) {
-      streetSelect.disabled = false;
-      CITIES_STREETS[selectedCity].forEach(street => {
-        const option = document.createElement("option");
-        option.value = street;
-        option.textContent = street;
-        streetSelect.appendChild(option);
-      });
-    } else {
-      streetSelect.disabled = true;
-    }
-
-    streetSelect.value = "";
+    FormHelpers.updateStreets(citySelect, streetSelect);
     this.formState["street"] = false;
   }
 
@@ -212,37 +124,15 @@ export class RegistrationManager {
 
   private showFieldError(fieldName: string, message: string): void {
     const input = this.form?.querySelector(`[name="${fieldName}"]`) as HTMLElement;
-    const wrapper = input?.closest(".input-wrapper");
-    const errorMessage = input?.closest(".form-group")?.querySelector(".error-message") as HTMLElement;
-    const errorIcon = wrapper?.querySelector(".error-icon") as HTMLElement;
-
     if (input) {
-      input.style.borderColor = "#e53e3e";
-    }
-    if (errorIcon) {
-      errorIcon.style.display = "block";
-    }
-    if (errorMessage) {
-      errorMessage.textContent = message;
-      errorMessage.style.display = "block";
+      FormHelpers.showFieldError(input, message);
     }
   }
 
   private clearFieldError(fieldName: string): void {
     const input = this.form?.querySelector(`[name="${fieldName}"]`) as HTMLElement;
-    const wrapper = input?.closest(".input-wrapper");
-    const errorMessage = input?.closest(".form-group")?.querySelector(".error-message") as HTMLElement;
-    const errorIcon = wrapper?.querySelector(".error-icon") as HTMLElement;
-
     if (input) {
-      input.style.borderColor = "";
-    }
-    if (errorIcon) {
-      errorIcon.style.display = "none";
-    }
-    if (errorMessage) {
-      errorMessage.textContent = "";
-      errorMessage.style.display = "none";
+      FormHelpers.clearFieldError(input);
     }
   }
 
@@ -276,33 +166,13 @@ export class RegistrationManager {
     };
 
     try {
-      const response = await fetch(API_ENDPOINTS.REGISTER, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        this.showFormError(error.message || "Registration failed. Please try again.");
-        return;
-      }
-
+      await RegistrationService.register(formData);
       alert("Registration successful!");
       window.location.hash = "#login";
     } catch (error) {
       console.error("Registration error:", error);
-      this.showFormError("Network error. Please check your connection and try again.");
-    }
-  }
-
-  private showFormError(message: string): void {
-    const formError = document.getElementById("form-error");
-    if (formError) {
-      formError.textContent = message;
-      formError.style.display = "block";
+      const message = error instanceof Error ? error.message : "Network error. Please check your connection and try again.";
+      FormHelpers.showFormError(message);
     }
   }
 }
