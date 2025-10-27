@@ -1,16 +1,16 @@
 import type { FormData, ValidationResult } from "../../types/index";
-import { RegistrationValidator } from "./regitrationValidation";
+import { AuthValidator } from "./AuthValidation";
 import { FormHelpers } from "./formHelpers";
 import { RegistrationService } from "./registrationService";
 
 export class RegistrationManager {
-  private validator: RegistrationValidator;
+  private validator: AuthValidator;
   private form: HTMLFormElement | null = null;
   private submitButton: HTMLButtonElement | null = null;
   private formState: Record<string, boolean> = {};
 
   constructor() {
-    this.validator = new RegistrationValidator();
+    this.validator = new AuthValidator();
   }
 
   init(): void {
@@ -155,7 +155,7 @@ export class RegistrationManager {
 
     if (!this.form) return;
 
-    const formData: FormData = {
+    const formData = {
       login: (this.form.querySelector("#login") as HTMLInputElement).value,
       password: (this.form.querySelector("#password") as HTMLInputElement).value,
       confirmPassword: (this.form.querySelector("#confirmPassword") as HTMLInputElement).value,
@@ -166,9 +166,9 @@ export class RegistrationManager {
     };
 
     try {
-      await RegistrationService.register(formData);
-      alert("Registration successful!");
-      window.location.hash = "#login";
+      const response = await RegistrationService.register(formData);
+      alert(`Registration successful! Welcome, ${response.data.user.login}!`);
+      window.location.hash = "#menu";
     } catch (error) {
       console.error("Registration error:", error);
       const message = error instanceof Error ? error.message : "Network error. Please check your connection and try again.";

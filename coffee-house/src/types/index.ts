@@ -47,6 +47,11 @@ export interface FormData {
   paymentMethod: string;
 }
 
+export interface LoginData {
+  login: string;
+  password: string;
+}
+
 export interface ValidationResult {
   isValid: boolean;
   message: string;

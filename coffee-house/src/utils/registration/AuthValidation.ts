@@ -1,6 +1,6 @@
 import type { ValidationResult } from "../../types/index";
 
-export class RegistrationValidator {
+export class AuthValidator {
   validateLogin(login: string): ValidationResult {
     if (!login || login.trim().length < 3) {
       return { isValid: false, message: "Login must be at least 3 characters long" };

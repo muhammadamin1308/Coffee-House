@@ -70,4 +70,12 @@ export class FormHelpers {
       formError.style.display = "block";
     }
   }
+
+    static clearFormError(): void {
+    const formError = document.getElementById("form-error");
+    if (formError) {
+      formError.textContent = "";
+      formError.style.display = "none";
+    }
+  }
 }

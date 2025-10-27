@@ -4,6 +4,7 @@ import { renderCart } from "../pages/cart";
 import { renderLogin } from "../pages/auth/login";
 import { renderRegister } from "../pages/auth/registration";
 import { RegistrationManager } from "../utils/registration/registerManager";
+import { LoginManager } from "../utils/registration/login/loginManager";
 
 import homeCSS from "../style/home.css?url";
 import menuCSS from "../style/menu.css?url";
@@ -18,7 +19,9 @@ const cssMap: Record<string, string> = {
 };
 
 async function loadCSS(fileName: string): Promise<void> {
-  document.querySelectorAll('link[data-page-style]').forEach(el => el.remove());
+  document
+    .querySelectorAll("link[data-page-style]")
+    .forEach((el) => el.remove());
 
   const link = document.createElement("link");
   link.rel = "stylesheet";
@@ -47,8 +50,10 @@ export async function renderRoute(route: string): Promise<void> {
       break;
 
     case "login":
-      await loadCSS("auth.css");
+      await loadCSS("login.css");
       content.innerHTML = renderLogin();
+      const loginManager = new LoginManager();
+      loginManager.init();
       break;
     case "register":
       await loadCSS("register.css");
