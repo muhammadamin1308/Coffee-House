@@ -120,4 +120,17 @@ export class ModalRenderer {
       setTimeout(() => notification.remove(), 300);
     }, 5000);
   }
+
+  showSuccessNotification(message: string): void {
+    const notification = document.createElement("div");
+    notification.className = "success-notification";
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.classList.add("fade-out");
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
 }

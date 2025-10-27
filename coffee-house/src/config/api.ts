@@ -11,4 +11,5 @@ export const API_ENDPOINTS = {
   REGISTER: `${API_BASE_URL}/auth/register`,
   LOGIN: `${API_BASE_URL}/auth/login`,
   CART: `${API_BASE_URL}/cart`,
+  CONFIRM_ORDER: `${API_BASE_URL}/orders/confirm`,
 };

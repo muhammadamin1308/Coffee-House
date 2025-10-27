@@ -29,11 +29,13 @@ export interface Coffee extends FavCoffee {
 }
 
 export interface CartItem {
-  id: number;
+  productId: number;
   name: string;
-  price: string;
-  selectedSize?: Size;
-  selectedAdditivesPrice?: string;
+  image: string;
+  size: Size;
+  additives: string[];
+  price: number;
+  discountPrice: number | null;
   quantity: number;
 }
 

@@ -37,7 +37,7 @@ export class LoginService {
     // Store authentication token and user data
     if (data.data.access_token) {
       localStorage.setItem("authToken", data.data.access_token);
-      localStorage.setItem("user", JSON.stringify(data.data.user.login));
+      localStorage.setItem("user", JSON.stringify(data.data.user));
     }
 
     return data;

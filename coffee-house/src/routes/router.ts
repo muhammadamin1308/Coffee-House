@@ -1,6 +1,6 @@
 import { renderHome, initializeSlider } from "../pages/home";
 import { renderMenu, loadMenuData } from "../pages/menu";
-import { renderCart } from "../pages/cart";
+import { renderCart, initializeCart } from "../pages/cart";
 import { renderLogin } from "../pages/auth/login";
 import { renderRegister } from "../pages/auth/registration";
 import { RegistrationManager } from "../utils/registration/registerManager";
@@ -9,12 +9,13 @@ import { LoginManager } from "../utils/registration/login/loginManager";
 import homeCSS from "../style/home.css?url";
 import menuCSS from "../style/menu.css?url";
 import registerCSS from "../style/register.css?url";
+import cartCSS from "../style/cart.css?url";
 
 const cssMap: Record<string, string> = {
   "home.css": homeCSS,
   "menu.css": menuCSS,
   "register.css": registerCSS,
-  "cart.css": menuCSS,
+  "cart.css": cartCSS,
   "auth.css": registerCSS,
 };
 
@@ -47,6 +48,7 @@ export async function renderRoute(route: string): Promise<void> {
     case "cart":
       await loadCSS("cart.css");
       content.innerHTML = renderCart();
+      initializeCart();
       break;
 
     case "login":

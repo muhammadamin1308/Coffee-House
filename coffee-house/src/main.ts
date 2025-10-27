@@ -1,4 +1,4 @@
-import { Header } from "./components/header";
+import { Header, initializeHeader } from "./components/header";
 import { Footer } from "./components/footer";
 import { setupRouter } from "./routes/router";
 import "./style/global.css";
@@ -17,4 +17,5 @@ app.innerHTML = `
   ${Footer()}
 `;
 
+initializeHeader();
 setupRouter();

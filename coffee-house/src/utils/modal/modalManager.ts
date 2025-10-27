@@ -1,4 +1,5 @@
 import { productService } from "../../services/productService";
+import { cartService } from "../../services/cartService";
 import { ModalState } from "./mdoalState";
 import { PriceCalculator } from "./priceCalc";
 import { ModalRenderer } from "./modalRenderer";
@@ -145,13 +146,20 @@ export class ModalManager {
     const product = this.state.getCurrentProduct();
     if (!product) return;
 
-    console.log("Adding to cart:", {
-      product,
-      size: this.state.getSelectedSize(),
-      additives: Array.from(this.state.getSelectedAdditives()),
-    });
+    const size = this.state.getSelectedSize();
+    const selectedAdditiveIndices = Array.from(this.state.getSelectedAdditives());
 
-    alert("Product added to cart!");
+    const additives = selectedAdditiveIndices
+      .map(index => product.additives?.[index]?.name)
+      .filter((name): name is string => name !== undefined);
+
+    cartService.addItem(product, size, additives);
+    
+    this.renderer.showSuccessNotification("Product added to cart!");
+    
+    setTimeout(() => {
+      this.closeModal();
+    }, 1000);
   }
 }
 
