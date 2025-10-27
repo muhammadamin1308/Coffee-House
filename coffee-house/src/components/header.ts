@@ -18,6 +18,9 @@ export function Header() {
           <li class="nav-item">
             <a href="#contact-us" class="nav-link text-action">Contact us</a>
           </li>
+          <li class="nav-item">
+            <a href="#register" class="nav-link text-action">Register</a>
+          </li>
         </ul>
         <a href="#cart" class="menu-link">
           <span class="text-action">Cart</span>
@@ -33,6 +36,7 @@ export function Header() {
         <a class="burger-link" href="#about">About</a>
         <a class="burger-link" href="#mobile-app">Mobile app</a>
         <a class="burger-link" href="#contact-us">Contact us</a>
+        <a class="burger-link" href="#register">Register</a>
         <a href="#cart" class="burger-link">
           <span class="">Cart</span>
           <img class="burger-coffee" src="assets/main/coffee-cup.svg" alt="" />

@@ -2,7 +2,8 @@ import { renderHome, initializeSlider } from "../pages/home";
 import { renderMenu, loadMenuData } from "../pages/menu";
 import { renderCart } from "../pages/cart";
 import { renderLogin } from "../pages/auth/login";
-import { renderSignup } from "../pages/auth/signup";
+import { renderRegister } from "../pages/auth/registration";
+import { RegistrationManager } from "../utils/registration/registerManager";
 
 async function loadCSS(fileName: string): Promise<void> {
   // Remove previously loaded page-specific styles
@@ -38,10 +39,11 @@ export async function renderRoute(route: string): Promise<void> {
       await loadCSS("auth.css");
       content.innerHTML = renderLogin();
       break;
-
-    case "signup":
-      await loadCSS("auth.css");
-      content.innerHTML = renderSignup();
+    case "register":
+      await loadCSS("register.css");
+      content.innerHTML = renderRegister();
+      const registrationManager = new RegistrationManager();
+      registrationManager.init();
       break;
 
     case "home":

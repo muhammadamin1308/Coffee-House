@@ -1,4 +1,4 @@
-import type { FormData, ValidationResult } from "../../types";
+import type { FormData, ValidationResult } from "../../types/index";
 import { CITIES_STREETS } from "../../types";
 import { API_ENDPOINTS } from "../../config/api";
 
