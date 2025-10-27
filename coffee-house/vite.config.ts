@@ -9,6 +9,7 @@ export default defineConfig({
   publicDir: 'public',
   preview: {
     host: '0.0.0.0',
-    strictPort: false
+    strictPort: false,
+    allowedHosts: ['.onrender.com']
   }
 })
