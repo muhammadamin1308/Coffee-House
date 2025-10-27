@@ -1,4 +1,4 @@
-import type { FormData, ValidationResult } from "../../types/index";
+import type {ValidationResult } from "../../types/index";
 import { AuthValidator } from "./AuthValidation";
 import { FormHelpers } from "./formHelpers";
 import { RegistrationService } from "./registrationService";
