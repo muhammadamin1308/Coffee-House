@@ -1,13 +1,12 @@
 import type {Coffee, FavCoffee, Category} from '../types/index'
-
-const API_BASE_URL = 'http://coffee-shop-be.eu-central-1.elasticbeanstalk.com'
+import { API_ENDPOINTS } from '../config/api'
 
 export class ProductService {
   private products: FavCoffee[] = []
 
   async loadProducts(): Promise<FavCoffee[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/products`)
+      const response = await fetch(API_ENDPOINTS.PRODUCTS)
       if (!response.ok) throw new Error('Failed to fetch')
 
       const data = await response.json()
@@ -21,7 +20,7 @@ export class ProductService {
 
   async loadFavoriteProducts(): Promise<FavCoffee[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/products/favorites`);
+      const response = await fetch(API_ENDPOINTS.FAVORITES);
       if (!response.ok) {
         throw new Error('Failed to fetch favorite products');
       }
