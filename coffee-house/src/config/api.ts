@@ -1,16 +1,19 @@
 const BACKEND_URL = 'http://coffee-shop-be.eu-central-1.elasticbeanstalk.com';
 
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// Use corsproxy.io which supports both GET and POST requests over HTTPS
+const CORS_PROXY = 'https://corsproxy.io/?';
 
-export const API_BASE_URL = import.meta.env.PROD 
-  ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL)}`
+const shouldUseProxy = import.meta.env.PROD;
+
+export const API_BASE_URL = shouldUseProxy 
+  ? CORS_PROXY + encodeURIComponent(BACKEND_URL)
   : BACKEND_URL;
 
 export const API_ENDPOINTS = {
-  PRODUCTS: `${API_BASE_URL}/products`,
-  FAVORITES: `${API_BASE_URL}/products/favorites`,
-  REGISTER: `${API_BASE_URL}/auth/register`,
-  LOGIN: `${API_BASE_URL}/auth/login`,
-  CART: `${API_BASE_URL}/cart`,
-  CONFIRM_ORDER: `${API_BASE_URL}/orders/confirm`,
+  PRODUCTS: shouldUseProxy ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL + '/products')}` : `${BACKEND_URL}/products`,
+  FAVORITES: shouldUseProxy ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL + '/products/favorites')}` : `${BACKEND_URL}/products/favorites`,
+  REGISTER: shouldUseProxy ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL + '/auth/register')}` : `${BACKEND_URL}/auth/register`,
+  LOGIN: shouldUseProxy ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL + '/auth/login')}` : `${BACKEND_URL}/auth/login`,
+  CART: shouldUseProxy ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL + '/cart')}` : `${BACKEND_URL}/cart`,
+  CONFIRM_ORDER: shouldUseProxy ? `${CORS_PROXY}${encodeURIComponent(BACKEND_URL + '/orders/confirm')}` : `${BACKEND_URL}/orders/confirm`,
 };
