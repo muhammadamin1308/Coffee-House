@@ -106,25 +106,21 @@ export class RegistrationManager {
   private setupEventListeners(): void {
     if (!this.form) return;
 
-    // Login validation
     const loginInput = this.form.querySelector("#login") as HTMLInputElement;
     loginInput?.addEventListener("blur", () => this.validateField("login"));
     loginInput?.addEventListener("focus", () => this.clearFieldError("login"));
     loginInput?.addEventListener("input", () => this.checkFormValidity());
 
-    // Password validation
     const passwordInput = this.form.querySelector("#password") as HTMLInputElement;
     passwordInput?.addEventListener("blur", () => this.validateField("password"));
     passwordInput?.addEventListener("focus", () => this.clearFieldError("password"));
     passwordInput?.addEventListener("input", () => this.checkFormValidity());
 
-    // Confirm password validation
     const confirmPasswordInput = this.form.querySelector("#confirmPassword") as HTMLInputElement;
     confirmPasswordInput?.addEventListener("blur", () => this.validateField("confirmPassword"));
     confirmPasswordInput?.addEventListener("focus", () => this.clearFieldError("confirmPassword"));
     confirmPasswordInput?.addEventListener("input", () => this.checkFormValidity());
 
-    // City change - update streets
     const citySelect = this.form.querySelector("#city") as HTMLSelectElement;
     citySelect?.addEventListener("change", () => {
       this.updateStreets();
@@ -133,7 +129,6 @@ export class RegistrationManager {
     });
     citySelect?.addEventListener("focus", () => this.clearFieldError("city"));
 
-    // Street validation
     const streetSelect = this.form.querySelector("#street") as HTMLSelectElement;
     streetSelect?.addEventListener("change", () => {
       this.validateField("street");
@@ -141,13 +136,11 @@ export class RegistrationManager {
     });
     streetSelect?.addEventListener("focus", () => this.clearFieldError("street"));
 
-    // House number validation
     const houseNumberInput = this.form.querySelector("#houseNumber") as HTMLInputElement;
     houseNumberInput?.addEventListener("blur", () => this.validateField("houseNumber"));
     houseNumberInput?.addEventListener("focus", () => this.clearFieldError("houseNumber"));
     houseNumberInput?.addEventListener("input", () => this.checkFormValidity());
 
-    // Form submission
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
   }
 
@@ -172,7 +165,6 @@ export class RegistrationManager {
       streetSelect.disabled = true;
     }
 
-    // Reset street selection
     streetSelect.value = "";
     this.formState["street"] = false;
   }
@@ -298,7 +290,6 @@ export class RegistrationManager {
         return;
       }
 
-      // Success - redirect to login or home
       alert("Registration successful!");
       window.location.hash = "#login";
     } catch (error) {

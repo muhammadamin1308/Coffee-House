@@ -7,7 +7,6 @@ export class PriceCalculator {
     selectedAdditives: Set<number>,
     isUserLoggedIn: boolean
   ): number {
-    // Get size price
     if (!product.sizes) {
       return 0;
     }
@@ -17,7 +16,6 @@ export class PriceCalculator {
         ? parseFloat(sizeOption.discountPrice)
         : parseFloat(sizeOption.price);
 
-    // Get additives price
     let additivesPrice = 0;
     selectedAdditives.forEach((index) => {
       if(!product.additives){

@@ -188,19 +188,15 @@ class CoffeeSlider {
   }
 
   private init(): void {
-    // Add event listeners for navigation buttons
     this.prevBtn?.addEventListener("click", () => this.prevSlide());
     this.nextBtn?.addEventListener("click", () => this.nextSlide());
 
-    // Add dot click listeners
     this.dots.forEach((dot, index) => {
       dot.addEventListener("click", () => this.goToSlide(index));
     });
 
-    // Start auto-play
     this.autoPlay();
 
-    // Update initial state
     this.updateSlider();
   }
 

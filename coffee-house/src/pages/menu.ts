@@ -50,7 +50,6 @@ function displayProducts(products: FavCoffee[]): void {
   if (!container) return;
   container.innerHTML = products.map(renderProductCard).join("");
 
-  // Setup click handlers for product cards
   setupProductCardListeners();
 }
 

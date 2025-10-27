@@ -33,12 +33,10 @@ export class ProductService {
   }
 
   async getProductById(id: number): Promise<Coffee | null> {
-    // First, ensure products are loaded
     if (this.products.length === 0) {
       await this.loadProducts();
     }
 
-    // Find the product in cached data
     const product = this.products.find(p => p.id === id);
     
     if (!product) {
@@ -46,7 +44,6 @@ export class ProductService {
       return null;
     }
 
-    // Convert FavCoffee to Coffee by adding sizes and additives
     const coffeeProduct: Coffee = {
       ...product,
       sizes: {

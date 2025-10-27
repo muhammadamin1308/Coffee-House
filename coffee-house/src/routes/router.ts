@@ -5,7 +5,6 @@ import { renderLogin } from "../pages/auth/login";
 import { renderRegister } from "../pages/auth/registration";
 import { RegistrationManager } from "../utils/registration/registerManager";
 
-// Import all CSS files so Vite bundles them
 import homeCSS from "../style/home.css?url";
 import menuCSS from "../style/menu.css?url";
 import registerCSS from "../style/register.css?url";
@@ -14,12 +13,11 @@ const cssMap: Record<string, string> = {
   "home.css": homeCSS,
   "menu.css": menuCSS,
   "register.css": registerCSS,
-  "cart.css": menuCSS, // Reuse menu.css for cart
-  "auth.css": registerCSS, // Reuse register.css for auth
+  "cart.css": menuCSS,
+  "auth.css": registerCSS,
 };
 
 async function loadCSS(fileName: string): Promise<void> {
-  // Remove previously loaded page-specific styles
   document.querySelectorAll('link[data-page-style]').forEach(el => el.remove());
 
   const link = document.createElement("link");

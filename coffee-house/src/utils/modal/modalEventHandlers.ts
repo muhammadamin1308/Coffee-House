@@ -19,18 +19,15 @@ export class ModalEventHandlers {
   }
 
   setupGlobalListeners(overlay: HTMLElement): void {
-    // Close button
     const closeBtn = document.getElementById("modal-close");
     closeBtn?.addEventListener("click", () => this.onClose());
 
-    // Overlay click
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) {
         this.onClose();
       }
     });
 
-    // ESC key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && overlay.classList.contains("active")) {
         this.onClose();
@@ -75,7 +72,6 @@ export class ModalEventHandlers {
   setupAddToCartListener(callback: () => void): void {
     const addToCartBtn = document.getElementById("add-to-cart-btn");
     if (addToCartBtn) {
-      // Remove any existing listeners by cloning
       const newBtn = addToCartBtn.cloneNode(true) as HTMLElement;
       addToCartBtn.parentNode?.replaceChild(newBtn, addToCartBtn);
       

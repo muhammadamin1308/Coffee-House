@@ -40,7 +40,6 @@ export class ModalManager {
   }
 
   private ensureElementsInitialized(): void {
-    // Re-initialize elements if they don't exist (in case they weren't in DOM during constructor)
     if (!this.overlay || !this.modal || !this.loader) {
       this.overlay = document.getElementById("modal-overlay");
       this.modal = document.getElementById("modal");
@@ -99,14 +98,11 @@ export class ModalManager {
     const product = this.state.getCurrentProduct();
     if (!product) return;
 
-    // Render product info
     this.renderer.renderProductInfo(product);
 
-    // Initialize default size
     const sizeKeys = Object.keys(product.sizes || {});
     this.state.initializeDefaultSize(sizeKeys);
 
-    // Render sizes
     const sizeContainer = document.getElementById("size-options");
     if (sizeContainer) {
       sizeContainer.innerHTML = this.renderer.renderSizeOptions(
@@ -117,7 +113,6 @@ export class ModalManager {
       this.eventHandlers.setupSizeListeners();
     }
 
-    // Render additives
     const additiveContainer = document.getElementById("additive-options");
     if (additiveContainer) {
       additiveContainer.innerHTML = this.renderer.renderAdditiveOptions(
@@ -127,10 +122,8 @@ export class ModalManager {
       this.eventHandlers.setupAdditiveListeners();
     }
 
-    // Setup add to cart button
     this.eventHandlers.setupAddToCartListener(() => this.addToCart());
 
-    // Update initial total
     this.updateTotal();
   }
 

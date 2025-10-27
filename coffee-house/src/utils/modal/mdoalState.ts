@@ -6,8 +6,6 @@ export class ModalState {
   private selectedAdditives: Set<number> = new Set();
   private isUserLoggedIn: boolean = false;
 
-
-  //Getters  
   getCurrentProduct(): Coffee | null {
     return this.currentProduct
   }
@@ -24,7 +22,6 @@ export class ModalState {
     return this.isUserLoggedIn;
   }
 
-  //Setters
   setCurrentProduct(product: Coffee | null): void {
     this.currentProduct = product;
   }
