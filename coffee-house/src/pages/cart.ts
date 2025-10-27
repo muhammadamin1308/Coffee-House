@@ -7,10 +7,10 @@ let isOrderProcessing = false;
 export function renderCart(): string {
   return `
     <main id="cart">
-      <div class="container cart-container">
-        <h2 class="heading-2">Shopping Cart</h2>
+      <div class="cart-page-container">
+        <h2 class="cart-heading">Cart</h2>
         <div id="cart-notification" class="cart-notification"></div>
-        <div id="cart-content" class="cart-content">
+        <div id="cart-content" class="cart-content-wrapper">
           ${renderCartContent()}
         </div>
       </div>
@@ -37,110 +37,119 @@ function renderCartContent(): string {
   }
 
   if (cart.length === 0) {
+    // Empty cart state
+    const { total } = cartService.getTotal();
+    
     return `
-      <div class="empty-cart">
-        <img src="assets/main/coffee-cup.svg" alt="Empty cart" class="empty-cart-icon" />
-        <h3>Your cart is empty</h3>
-        <p>Add some delicious items to get started!</p>
-        <a href="#menu" class="btn-primary">Browse Menu</a>
+      <div class="empty-cart-layout">
+        ${isLoggedIn ? `
+          <div class="cart-summary-info">
+            <div class="info-row">
+              <span class="info-label">Total:</span>
+              <span class="info-value">$${total.toFixed(2)}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Address:</span>
+              <span class="info-value">${userData?.city || "City"}, ${userData?.street || "Street"}, ${userData?.houseNumber || ""}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Pay by:</span>
+              <span class="info-value">${userData?.paymentMethod || "Card"}</span>
+            </div>
+          </div>
+        ` : `
+          <div class="cart-total-simple">
+            <span class="total-label">Total:</span>
+            <span class="total-value">$${total.toFixed(2)}</span>
+          </div>
+          <div class="auth-buttons-container">
+            <a href="#login" class="btn-auth btn-signin">Sign In</a>
+            <a href="#registration" class="btn-auth btn-registration">Registration</a>
+          </div>
+        `}
       </div>
     `;
   }
 
   const { total, discountTotal } = cartService.getTotal();
+  const displayTotal = discountTotal !== null ? discountTotal : total;
 
   return `
-    <div class="cart-items-list">
+    <div class="cart-items-container">
       ${cart.map((item: CartItem, index: number) => renderCartItem(item, index, isLoggedIn)).join("")}
-    </div>
-    
-    <div class="cart-summary">
-      <div class="cart-total">
-        <span class="total-label">Total:</span>
-        <div class="total-prices">
-          ${
-            discountTotal !== null && discountTotal < total
-              ? `
-            <span class="original-total">$${total.toFixed(2)}</span>
-            <span class="discount-total">$${discountTotal.toFixed(2)}</span>
-          `
-              : `<span class="final-total">$${total.toFixed(2)}</span>`
-          }
-        </div>
-      </div>
       
-      ${
-        isLoggedIn
-          ? `
-        <div class="delivery-info">
-          <h3>Delivery Address</h3>
-          <p class="address-text">
-            ${userData?.city || "City"}, ${userData?.street || "Street"}, ${userData?.houseNumber || "N/A"}
-          </p>
-        </div>
-        <button class="btn-primary btn-confirm" id="confirm-order-btn" ${isOrderProcessing ? "disabled" : ""}>
-          ${isOrderProcessing ? '<span class="btn-loader"></span>' : "Confirm Order"}
-        </button>
-      `
-          : `
-        <div class="auth-prompt">
-          <p>Please sign in to complete your order</p>
-          <div class="auth-buttons">
-            <a href="#login" class="btn-secondary">Sign In</a>
-            <a href="#registration" class="btn-primary">Register</a>
+      <div class="cart-summary-section">
+        ${isLoggedIn ? `
+          <div class="cart-summary-info">
+            <div class="info-row">
+              <span class="info-label">Total:</span>
+              <div class="info-value">
+                ${discountTotal !== null && discountTotal < total ? `
+                  <span class="price-original-total">$${total.toFixed(2)}</span>
+                  <span class="price-discount-total">$${discountTotal.toFixed(2)}</span>
+                ` : `
+                  <span class="price-final-total">$${total.toFixed(2)}</span>
+                `}
+              </div>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Address:</span>
+              <span class="info-value">${userData?.city || "City"}, ${userData?.street || "Street"}, ${userData?.houseNumber || ""}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Pay by:</span>
+              <span class="info-value">${userData?.paymentMethod || "Card"}</span>
+            </div>
           </div>
-        </div>
-      `
-      }
+          <button class="btn-confirm-order" id="confirm-order-btn" ${isOrderProcessing ? "disabled" : ""}>
+            ${isOrderProcessing ? '<span class="btn-loader"></span>' : "Confirm"}
+          </button>
+        ` : `
+          <div class="cart-total-simple">
+            <span class="total-label">Total:</span>
+            <span class="total-value">$${displayTotal.toFixed(2)}</span>
+          </div>
+          <div class="auth-buttons-container">
+            <a href="#login" class="btn-auth btn-signin">Sign In</a>
+            <a href="#registration" class="btn-auth btn-registration">Registration</a>
+          </div>
+        `}
+      </div>
     </div>
   `;
 }
 
 function renderCartItem(item: CartItem, index: number, isLoggedIn: boolean): string {
-  const itemPrice = item.discountPrice !== null ? item.discountPrice : item.price;
+  const itemPrice = item.discountPrice !== null && isLoggedIn ? item.discountPrice : item.price;
   const itemTotal = itemPrice * item.quantity;
-  const hasDiscount = item.discountPrice !== null && item.discountPrice < item.price;
+  const hasDiscount = isLoggedIn && item.discountPrice !== null && item.discountPrice < item.price;
+  const originalTotal = item.price * item.quantity;
 
   return `
-    <div class="cart-item" data-index="${index}">
-      <div class="cart-item-image">
+    <div class="cart-item-row">
+      <button class="item-checkbox" data-index="${index}">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="0.5" y="0.5" width="15" height="15" rx="3" stroke="currentColor"/>
+        </svg>
+      </button>
+      
+      <div class="item-image-wrapper">
         <img src="${item.image}" alt="${item.name}" onerror="this.src='assets/coffee/coffee/1.jpg'" />
       </div>
       
-      <div class="cart-item-details">
-        <h3 class="cart-item-name">${item.name}</h3>
-        <div class="cart-item-specs">
-          <span class="item-size">Size: ${item.size.toUpperCase()}</span>
-          ${
-            item.additives.length > 0
-              ? `<span class="item-additives">Extras: ${item.additives.join(", ")}</span>`
-              : ""
-          }
-        </div>
+      <div class="item-info">
+        <h3 class="item-name">${item.name}</h3>
+        <p class="item-details">${item.size}, ${item.additives.join(", ") || "No extras"}</p>
       </div>
       
-      <div class="cart-item-quantity">
-        <button class="qty-btn qty-decrease" data-index="${index}">−</button>
-        <span class="qty-value">${item.quantity}</span>
-        <button class="qty-btn qty-increase" data-index="${index}">+</button>
+      <div class="item-price">
+        ${hasDiscount ? `
+          <span class="price-crossed">$${originalTotal.toFixed(2)}</span>
+          <span class="price-discounted">$${itemTotal.toFixed(2)}</span>
+        ` : `
+          <span class="price-regular">$${itemTotal.toFixed(2)}</span>
+        `}
       </div>
-      
-      <div class="cart-item-price">
-        ${
-          hasDiscount && isLoggedIn
-            ? `
-          <span class="price-original">$${(item.price * item.quantity).toFixed(2)}</span>
-          <span class="price-discount">$${itemTotal.toFixed(2)}</span>
-        `
-            : `<span class="price-final">$${itemTotal.toFixed(2)}</span>`
-        }
-      </div>
-      
-      <button class="cart-item-remove" data-index="${index}" title="Remove item">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M16 4L4 16M4 4L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
     </div>
   `;
 }
