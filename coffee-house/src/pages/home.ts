@@ -51,28 +51,28 @@ export function renderHome(): string {
             <div class="about-gallery">
               <div class="gallery-item one">
                 <img
-                  src="assets/main/about-1.jpg"
+                  src="/assets/main/about-1.jpg"
                   alt="Coffee house interior"
                   class="gallery-img"
                 />
               </div>
               <div class="gallery-item two">
                 <img
-                  src="assets/main/about-2.jpg"
+                  src="/assets/main/about-2.jpg"
                   alt="Happy customers"
                   class="gallery-img"
                 />
               </div>
               <div class="gallery-item three">
                 <img
-                  src="assets/main/about-3.jpg"
+                  src="/assets/main/about-3.jpg"
                   alt="Coffee preparation"
                   class="gallery-img"
                 />
               </div>
               <div class="gallery-item four">
                 <img
-                  src="assets/main/about-4.jpg"
+                  src="/assets/main/about-4.jpg"
                   alt="Couple enjoying coffee"
                   class="gallery-img"
                 />
@@ -118,9 +118,9 @@ export function renderHome(): string {
             </div>
             <div class="mobile-app-images">
               <img
-                src="assets/main/mobile-screens.png"
-                alt="Mobile app screens"
-                class="mobile-screens"
+                src="/assets/main/mobile-screens.png"
+                alt="mobile app screens"
+                class="mobile-img"
               />
             </div>
           </div>
@@ -133,11 +133,11 @@ export function renderHome(): string {
 function renderSliderControls() {
   return `
     <button class="slider-btn prev-btn" id="prevBtn">
-      <img src="assets/prev-btn.svg" alt="Previous" />
+      <img src="/assets/prev-btn.svg" alt="Previous" />
     </button>
     <div class="slider" id="slider"></div>
     <button class="slider-btn next-btn" id="nextBtn">
-      <img src="assets/next-btn.svg" alt="Next" />
+      <img src="/assets/next-btn.svg" alt="Next" />
     </button>
   `;
 }
@@ -152,7 +152,7 @@ function renderSlides(products: FavCoffee[]) {
     <div class="slide ${index === 0 ? "active" : ""}" data-index="${index}">
       <div class="coffee-card">
         <img
-          src="assets/coffee/coffee-${p.id}.jpg"
+          src="/assets/coffee/coffee-${p.id}.jpg"
           alt="${p.name}"
           class="coffee-image"
         />

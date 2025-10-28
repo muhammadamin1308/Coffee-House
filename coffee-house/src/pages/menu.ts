@@ -33,7 +33,7 @@ function renderProductCard(p: FavCoffee): string {
   return `
       <article class="menu-card" data-product-id="${p.id}" style="cursor: pointer;">
       <div class="menu-card-image">
-        <img src="assets/coffee/${p.id}.jpg" alt="${p.name}" />
+        <img src="/assets/coffee/${p.id}.jpg" alt="${p.name}" />
       </div>
       <div class="menu-card-content">
         <h3>${p.name}</h3>

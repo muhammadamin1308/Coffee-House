@@ -5,7 +5,7 @@ export function Header() {
     <header>
       <nav>
         <a href="#home">
-          <img class="logo-img" src="assets/logo.svg" alt="logo" />
+          <img class="logo-img" src="/assets/logo.svg" alt="logo" />
         </a>
         <ul class="nav-menu">
           <li class="nav-item">
@@ -24,18 +24,18 @@ export function Header() {
         <div class="header-actions">
           <a href="#cart" class="cart-link" id="cart-link">
             <div class="cart-icon-wrapper">
-              <img src="assets/main/shopping-bag.svg" alt="Cart" />
+              <img src="/assets/main/shopping-bag.svg" alt="Cart" />
             </div>
             <span class="cart-count-text" id="cart-count-text">2</span>
           </a>
           <a href="#menu" class="menu-link">
             <span class="text-action">Menu</span>
-            <img src="assets/main/coffee-cup.svg" alt="Menu" />
+            <img src="/assets/main/coffee-cup.svg" alt="Menu" />
           </a>
         </div>
         <div class="burger" id="burger">
-          <img class="burger-default" src="assets/burger-default.svg" alt="" style="display: block;" />
-          <img class="burger-active close-burger" src="assets/burger-active.svg" alt="" style="display: none;"/>
+          <img class="burger-default" src="/assets/burger-default.svg" alt="" style="display: block;" />
+          <img class="burger-active close-burger" src="/assets/burger-active.svg" alt="" style="display: none;"/>
         </div>
       </nav>
       <div class="menu" id="menu">
@@ -45,13 +45,13 @@ export function Header() {
         <a class="burger-link" href="#contact-us">Contact us</a>
         <a href="#cart" class="burger-link" id="mobile-cart-link">
           <div class="cart-icon-wrapper">
-            <img class="burger-coffee" src="assets/main/shopping-bag.svg" alt="Cart" />
+            <img class="burger-coffee" src="/assets/main/shopping-bag.svg" alt="Cart" />
           </div>
           <span class="cart-count-text" id="mobile-cart-count-text">2</span>
         </a>
         <a href="#menu" class="burger-link">
           <span class="">Menu</span>
-          <img class="burger-coffee" src="assets/main/coffee-cup.svg" alt="" />
+          <img class="burger-coffee" src="/assets/main/coffee-cup.svg" alt="" />
         </a>
       </div>
     </header>

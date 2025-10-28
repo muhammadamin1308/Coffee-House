@@ -64,17 +64,17 @@ export function Footer() {
               <h3 class="heading-3">Contact us</h3>
               <div class="contact-info">
                 <div class="contact-item">
-                  <img src="assets/main/pin-alt.png" alt="" />
-                  <span>8558 Green Rd., LA</span>
+                  <img src="/assets/main/pin-alt.png" alt="" />
+                  <span class="contact-text">8558 Green Rd., LA</span>
                 </div>
                 <div class="contact-item">
-                  <img src="assets/main/phone.png" alt="" />
+                  <img src="/assets/main/phone.png" alt="" />
                   <a href="tel:+16035550123" class="contact-link"
                     >+1 (603) 555-0123</a
                   >
                 </div>
                 <div class="contact-item">
-                  <img src="assets/main/clock.png" alt="" />
+                  <img src="/assets/main/clock.png" alt="" />
                   <span>Mon-Sat: 9:00 AM – 23:00 PM</span>
                 </div>
               </div>

@@ -134,7 +134,7 @@ function renderCartItem(item: CartItem, index: number, isLoggedIn: boolean): str
       </button>
       
       <div class="item-image-wrapper">
-        <img src="${item.image}" alt="${item.name}" onerror="this.src='assets/coffee/coffee/1.jpg'" />
+        <img src="${item.image}" alt="${item.name}" onerror="this.src='/assets/coffee/coffee/1.jpg'" />
       </div>
       
       <div class="item-info">
