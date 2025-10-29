@@ -111,7 +111,7 @@ function renderCartContent(): string {
           </div>
           <div class="auth-buttons-container">
             <a href="#login" class="btn-auth btn-signin">Sign In</a>
-            <a href="#registration" class="btn-auth btn-registration">Registration</a>
+            <a href="#register" class="btn-auth btn-registration">Registration</a>
           </div>
         `}
       </div>
