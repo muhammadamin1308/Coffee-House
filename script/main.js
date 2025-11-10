@@ -1,5 +1,9 @@
 // Coffee Slider Functionality
 
+window.onload = function() {
+  this.alert("Sorry for inconvenience, PR link is here: https://github.com/muhammadamin1308/Coffee-House/pull/3");
+}
+
 let burger = document.querySelector('#burger')
 let menu = document.querySelector('#menu')
 
