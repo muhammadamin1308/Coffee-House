@@ -25,7 +25,7 @@
 
 .hero-menu-btn {
   display: inline-block;
-  background-color: var(--text-light);
+  background-color: var(--bg-body);
   color: var(--text-dark);
   padding: 19px 67px;
   border-radius: 100px;

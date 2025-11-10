@@ -12,6 +12,17 @@
   --error-bg: #ffebee;
 }
 
+[data-theme="dark"] {
+  --bg-color: #1a1614;
+  --text-dark: #e1d4c9;
+  --text-light: #403f3d;
+  --accent-dark: #2d2824;
+  --border-color: #4a4340;
+  --accent-italic: #d4a574;
+  --success-color: #66bb6a;
+  --error-color: #ef5350;
+}
+
 .cart-page-container {
   max-width: 800px;
   margin: 0 auto;

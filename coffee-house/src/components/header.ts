@@ -22,6 +22,10 @@ export function Header() {
           </li>
         </ul>
         <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" type="button">
+            <img class="theme-icon" data-theme-icon="dark" src="/assets/dark-mode.svg" alt="Enable dark mode" />
+            <img class="theme-icon" data-theme-icon="light" src="/assets/light-mode.svg" alt="Enable light mode" />
+          </button>
           <a href="#cart" class="cart-link" id="cart-link">
             <div class="cart-icon-wrapper">
               <img src="/assets/main/shopping-bag.svg" alt="Cart" />
@@ -39,6 +43,10 @@ export function Header() {
         </div>
       </nav>
       <div class="menu" id="menu">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" type="button">
+          img class="theme-icon" data-theme-icon="dark" src="/assets/dark-mode.svg" alt="Enable dark mode" />
+          <img class="theme-icon" data-theme-icon="light" src="/assets/light-mode.svg" alt="Enable light mode" />
+        </button>
         <a class="burger-link" href="#menu">Favorite coffee</a>
         <a class="burger-link" href="#about">About</a>
         <a class="burger-link" href="#mobile-app">Mobile app</a>
@@ -61,6 +69,7 @@ export function Header() {
 export function initializeHeader(): void {
   updateCartDisplay();
   window.addEventListener("cartUpdated", updateCartDisplay);
+  initializeTheme();
 }
 
 function updateCartDisplay(): void {
@@ -87,4 +96,53 @@ function updateCartDisplay(): void {
   if (mobileCartCountText) {
     mobileCartCountText.textContent = itemCount.toString();
   }
+}
+
+// dark/light
+export function initializeTheme(): void {
+  try {
+    const saved = localStorage.getItem("theme");
+    const prefersDark =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initial = (saved as 'dark' | 'light') || (prefersDark ? 'dark' : 'light');
+  applyTheme(initial as 'dark' | 'light');
+
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (!toggleBtn) return;
+
+    toggleBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") === "dark" ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {
+      }
+    });
+  } catch (e) {
+  }
+}
+
+function applyTheme(theme: 'dark' | 'light'): void {
+  document.documentElement.setAttribute('data-theme', theme);
+  updateThemeIcons(theme);
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+  }
+}
+
+function updateThemeIcons(theme: 'dark' | 'light'): void {
+  const icons = document.querySelectorAll<HTMLImageElement>('#theme-toggle .theme-icon');
+  icons.forEach((icon) => {
+    const iconType = icon.getAttribute('data-theme-icon');
+    if (!iconType) return;
+    if (theme === 'dark') {
+      icon.style.display = iconType === 'light' ? 'block' : 'none';
+    } else {
+      icon.style.display = iconType === 'dark' ? 'block' : 'none';
+    }
+  });
 }

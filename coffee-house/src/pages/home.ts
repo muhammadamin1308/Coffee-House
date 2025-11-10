@@ -152,7 +152,7 @@ function renderSlides(products: FavCoffee[]) {
     <div class="slide ${index === 0 ? "active" : ""}" data-index="${index}">
       <div class="coffee-card">
         <img
-          src="/assets/coffee/coffee-${p.id}.jpg"
+          src="/assets/coffee/${p.id}.jpg"
           alt="${p.name}"
           class="coffee-image"
         />
